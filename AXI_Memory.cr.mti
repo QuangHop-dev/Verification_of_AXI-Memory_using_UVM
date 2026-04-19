@@ -1,0 +1,21 @@
+D:/GitHub/Verification_of_AXI-Memory_using_UVM/design.sv {2 {vlog -work work -vopt -sv -stats=none D:/GitHub/Verification_of_AXI-Memory_using_UVM/design.sv
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+-- Compiling module axi_slave
+** Warning: D:/GitHub/Verification_of_AXI-Memory_using_UVM/design.sv(760): (vlog-2182) 'retaddr' might be read before written in always_comb or always @* block.
+** Warning: D:/GitHub/Verification_of_AXI-Memory_using_UVM/design.sv(1089): (vlog-2182) 'rdretaddr' might be read before written in always_comb or always @* block.
+-- Compiling interface axi_if
+
+Top level modules:
+	axi_slave
+
+} {} {}} D:/GitHub/Verification_of_AXI-Memory_using_UVM/testbench.sv {1 {vlog -work work -vopt -sv -stats=none D:/GitHub/Verification_of_AXI-Memory_using_UVM/testbench.sv
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+** Note: (vlog-2286) D:/GitHub/Verification_of_AXI-Memory_using_UVM/testbench.sv(1): Using implicit +incdir+C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src from import uvm_pkg
+-- Compiling package testbench_sv_unit
+-- Importing package mtiUvm.uvm_pkg (uvm-1.1d Built-in)
+-- Compiling module tb
+
+Top level modules:
+	tb
+
+} {} {}}

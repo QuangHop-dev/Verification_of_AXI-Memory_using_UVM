@@ -1,0 +1,60 @@
+BEGIN 3:axi_if:fast__1:work
+    wready :  1:testbench_sv_unit:fast:work
+    bvalid :  1:testbench_sv_unit:fast:work
+    awvalid :  1:testbench_sv_unit:fast:work
+    arready :  1:testbench_sv_unit:fast:work
+    next_addrrd :  1:testbench_sv_unit:fast:work
+    awaddr :  1:testbench_sv_unit:fast:work
+    arlen :  1:testbench_sv_unit:fast:work
+    rvalid :  1:testbench_sv_unit:fast:work
+    rdata :  1:testbench_sv_unit:fast:work
+    wdata :  1:testbench_sv_unit:fast:work
+    rresp :  1:testbench_sv_unit:fast:work
+    next_addrwr :  1:testbench_sv_unit:fast:work
+    bresp :  1:testbench_sv_unit:fast:work
+    awlen :  1:testbench_sv_unit:fast:work
+    arvalid :  1:testbench_sv_unit:fast:work
+    resetn :  1:testbench_sv_unit:fast:work
+    rlast :  1:testbench_sv_unit:fast:work
+    clk :  1:testbench_sv_unit:fast:work
+END 
+BEGIN 3:axi_if:fast__2:work
+    bready :  1:tb:fast:work
+    awid :  1:tb:fast:work
+    arlen :  1:tb:fast:work
+    wid :  1:tb:fast:work
+    rlast :  1:tb:fast:work
+    clk :  1:tb:fast:work
+    bresp :  1:tb:fast:work
+    awaddr :  1:tb:fast:work
+    arvalid :  1:tb:fast:work
+    wlast :  1:tb:fast:work
+    next_addrwr :  1:tb:fast:work
+    awready :  1:tb:fast:work
+    araddr :  1:tb:fast:work
+    wready :  1:tb:fast:work
+    rresp :  1:tb:fast:work
+    bid :  1:tb:fast:work
+    awsize :  1:tb:fast:work
+    arburst :  1:tb:fast:work
+    wstrb :  1:tb:fast:work
+    rready :  1:tb:fast:work
+    awvalid :  1:tb:fast:work
+    arid :  1:tb:fast:work
+    wvalid :  1:tb:fast:work
+    rdata :  1:tb:fast:work
+    bvalid :  1:tb:fast:work
+    next_addrrd :  1:tb:fast:work
+    awlen :  1:tb:fast:work
+    arsize :  1:tb:fast:work
+    wdata :  1:tb:fast:work
+    rvalid :  1:tb:fast:work
+    resetn :  1:tb:fast:work
+    arready :  1:tb:fast:work
+    awburst :  1:tb:fast:work
+    rid :  1:tb:fast:work
+END 
+BEGIN 1:axi_slave:fast:work
+    nextaddr :  1:tb:fast:work
+    rdnextaddr :  1:tb:fast:work
+END 

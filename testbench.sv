@@ -1,4 +1,4 @@
-include "uvm_macros.svh"
+`include "uvm_macros.svh"
  import uvm_pkg::*;
 
 
@@ -85,7 +85,7 @@ class rst_dut extends uvm_sequence#(transaction);
          $display("------------------------------");
         `uvm_info("SEQ", "Sending RST Transaction to DRV", UVM_NONE);
         start_item(tr);
-        assert(tr.randomize);
+        assert(tr.randomize());
         tr.op      = rstdut;
         finish_item(tr);
       end
@@ -115,7 +115,7 @@ class valid_wrrd_fixed extends uvm_sequence#(transaction);
         $display("------------------------------");
         `uvm_info("SEQ", "Sending Fixed mode Transaction to DRV", UVM_NONE);
         start_item(tr);
-        assert(tr.randomize);
+        assert(tr.randomize());
           tr.op      = wrrdfixed;
           tr.awlen   = 7;
           tr.awburst = 0;
@@ -143,7 +143,7 @@ class valid_wrrd_incr extends uvm_sequence#(transaction);
         $display("------------------------------");
         `uvm_info("SEQ", "Sending INCR mode Transaction to DRV", UVM_NONE);
         start_item(tr);
-        assert(tr.randomize);
+        assert(tr.randomize());
           tr.op      = wrrdincr;
           tr.awlen   = 7;
           tr.awburst = 1;
@@ -172,7 +172,7 @@ class valid_wrrd_wrap extends uvm_sequence#(transaction);
          $display("------------------------------");
         `uvm_info("SEQ", "Sending WRAP mode Transaction to DRV", UVM_NONE);
         start_item(tr);
-        assert(tr.randomize);
+        assert(tr.randomize());
           tr.op      = wrrdwrap;
           tr.awlen   = 7;
           tr.awburst = 2;
@@ -201,7 +201,7 @@ class err_wrrd_fix extends uvm_sequence#(transaction);
         $display("------------------------------");
         `uvm_info("SEQ", "Sending Error Transaction to DRV", UVM_NONE);
         start_item(tr);
-        assert(tr.randomize);
+        assert(tr.randomize());
           tr.op      = wrrderrfix;
           tr.awlen   = 7;
           tr.awburst = 0;
@@ -244,30 +244,30 @@ class driver extends uvm_driver #(transaction);
   task reset_dut(); 
     begin
     `uvm_info("DRV", "System Reset : Start of Simulation", UVM_MEDIUM);
-    vif.resetn      &lt;= 1'b0;  ///active high reset
-    vif.awvalid     &lt;= 1'b0;
-    vif.awid        &lt;= 1'b0;
-    vif.awlen       &lt;= 0;
-    vif.awsize      &lt;= 0;
-    vif.awaddr      &lt;= 0;
-    vif.awburst     &lt;= 0;
+    vif.resetn      <= 1'b0;  ///active high reset
+    vif.awvalid     <= 1'b0;
+    vif.awid        <= 1'b0;
+    vif.awlen       <= 0;
+    vif.awsize      <= 0;
+    vif.awaddr      <= 0;
+    vif.awburst     <= 0;
       
-    vif.wvalid      &lt;= 0;
-    vif.wid         &lt;= 0;
-    vif.wdata       &lt;= 0;
-    vif.wstrb       &lt;= 0;
-    vif.wlast       &lt;= 0;
+    vif.wvalid      <= 0;
+    vif.wid         <= 0;
+    vif.wdata       <= 0;
+    vif.wstrb       <= 0;
+    vif.wlast       <= 0;
       
-    vif.bready      &lt;= 0;
+    vif.bready      <= 0;
     
-    vif.arvalid     &lt;= 1'b0;
-    vif.arid        &lt;= 1'b0;
-    vif.arlen       &lt;= 0;
-    vif.arsize      &lt;= 0;
-    vif.araddr      &lt;= 0;
-    vif.arburst     &lt;= 0; 
+    vif.arvalid     <= 1'b0;
+    vif.arid        <= 1'b0;
+    vif.arlen       <= 0;
+    vif.arsize      <= 0;
+    vif.araddr      <= 0;
+    vif.arburst     <= 0; 
       
-    vif.rready      &lt;= 0;
+    vif.rready      <= 0;
      @(posedge vif.clk);
       end
   endtask
@@ -278,43 +278,43 @@ class driver extends uvm_driver #(transaction);
   task wrrd_fixed_wr();
             `uvm_info("DRV", "Fixed Mode Write Transaction Started", UVM_NONE);
     /////////////////////////write logic
-            vif.resetn      &lt;= 1'b1;
-            vif.awvalid     &lt;= 1'b1;
-            vif.awid        &lt;= tr.id;
-            vif.awlen       &lt;= 7;
-            vif.awsize      &lt;= 2;
-            vif.awaddr      &lt;= 5;
-            vif.awburst     &lt;= 0;
+            vif.resetn      <= 1'b1;
+            vif.awvalid     <= 1'b1;
+            vif.awid        <= tr.id;
+            vif.awlen       <= 7;
+            vif.awsize      <= 2;
+            vif.awaddr      <= 5;
+            vif.awburst     <= 0;
      
      
-            vif.wvalid      &lt;= 1'b1;
-            vif.wid         &lt;= tr.id;
-            vif.wdata       &lt;= $urandom_range(0,10);
-            vif.wstrb       &lt;= 4'b1111;
-            vif.wlast       &lt;= 0;
+            vif.wvalid      <= 1'b1;
+            vif.wid         <= tr.id;
+            vif.wdata       <= $urandom_range(0,10);
+            vif.wstrb       <= 4'b1111;
+            vif.wlast       <= 0;
      
-            vif.arvalid     &lt;= 1'b0;  ///turn off read 
-            vif.rready      &lt;= 1'b0;
-            vif.bready      &lt;= 1'b0;
+            vif.arvalid     <= 1'b0;  ///turn off read 
+            vif.rready      <= 1'b0;
+            vif.bready      <= 1'b0;
              @(posedge vif.clk);
             
              @(posedge vif.wready);
              @(posedge vif.clk);
 
-     for(int i = 0; i &lt; (vif.awlen); i++)//0 - 6 -&gt; 7
+     for(int i = 0; i < (vif.awlen); i++)//0 - 6 -> 7
          begin
-            vif.wdata       &lt;= $urandom_range(0,10);
-            vif.wstrb       &lt;= 4'b1111;
+            vif.wdata       <= $urandom_range(0,10);
+            vif.wstrb       <= 4'b1111;
             @(posedge vif.wready);
             @(posedge vif.clk);
          end
-         vif.awvalid     &lt;= 1'b0;
-         vif.wvalid      &lt;= 1'b0;
-         vif.wlast       &lt;= 1'b1;
-         vif.bready      &lt;= 1'b1;
+         vif.awvalid     <= 1'b0;
+         vif.wvalid      <= 1'b0;
+         vif.wlast       <= 1'b1;
+         vif.bready      <= 1'b1;
          @(negedge vif.bvalid); 
-         vif.wlast       &lt;= 1'b0;
-         vif.bready      &lt;= 1'b0;  
+         vif.wlast       <= 1'b0;
+         vif.bready      <= 1'b0;  
         /////////////////////////////////////// read logic
    endtask
    
@@ -324,23 +324,23 @@ class driver extends uvm_driver #(transaction);
         `uvm_info("DRV", "Fixed Mode Read Transaction Started", UVM_NONE);   
         @(posedge vif.clk);
 
-        vif.arid        &lt;= tr.id;
-        vif.arlen       &lt;= 7;
-        vif.arsize      &lt;= 2;
-        vif.araddr      &lt;= 5;
-        vif.arburst     &lt;= 0; 
-        vif.arvalid     &lt;= 1'b1;  
-        vif.rready      &lt;= 1'b1;
+        vif.arid        <= tr.id;
+        vif.arlen       <= 7;
+        vif.arsize      <= 2;
+        vif.araddr      <= 5;
+        vif.arburst     <= 0; 
+        vif.arvalid     <= 1'b1;  
+        vif.rready      <= 1'b1;
        
         
-     for(int i = 0; i &lt; (vif.arlen + 1); i++) begin // 0 1  2 3 4 5 6 7
+     for(int i = 0; i < (vif.arlen + 1); i++) begin // 0 1  2 3 4 5 6 7
        @(posedge vif.arready);
        @(posedge vif.clk);
       end
       
      @(negedge vif.rlast);      
-     vif.arvalid &lt;= 1'b0;
-     vif.rready  &lt;= 1'b0; 
+     vif.arvalid <= 1'b0;
+     vif.rready  <= 1'b0; 
 
   endtask
   
@@ -350,44 +350,44 @@ class driver extends uvm_driver #(transaction);
    task wrrd_incr_wr();
    /////////////////////////write logic
     `uvm_info("DRV", "INCR Mode Write Transaction Started", UVM_NONE);
-            vif.resetn      &lt;= 1'b1;
-            vif.awvalid     &lt;= 1'b1;
-            vif.awid        &lt;= tr.id;
-            vif.awlen       &lt;= 7;
-            vif.awsize      &lt;= 2;
-            vif.awaddr      &lt;= 5;
-            vif.awburst     &lt;= 1;
+            vif.resetn      <= 1'b1;
+            vif.awvalid     <= 1'b1;
+            vif.awid        <= tr.id;
+            vif.awlen       <= 7;
+            vif.awsize      <= 2;
+            vif.awaddr      <= 5;
+            vif.awburst     <= 1;
      
      
-            vif.wvalid      &lt;= 1'b1;
-            vif.wid         &lt;= tr.id;
-            vif.wdata       &lt;= $urandom_range(0,10);
-            vif.wstrb       &lt;= 4'b1111;
-            vif.wlast       &lt;= 0;
+            vif.wvalid      <= 1'b1;
+            vif.wid         <= tr.id;
+            vif.wdata       <= $urandom_range(0,10);
+            vif.wstrb       <= 4'b1111;
+            vif.wlast       <= 0;
      
-            vif.arvalid     &lt;= 1'b0;  ///turn off read 
-            vif.rready      &lt;= 1'b0;
-            vif.bready      &lt;= 1'b0;
+            vif.arvalid     <= 1'b0;  ///turn off read 
+            vif.rready      <= 1'b0;
+            vif.bready      <= 1'b0;
             
             
              @(posedge vif.wready);
              @(posedge vif.clk);
 
-     for(int i = 0; i &lt; (vif.awlen); i++)
+     for(int i = 0; i < (vif.awlen); i++)
          begin
-            vif.wdata       &lt;= $urandom_range(0,10);
-            vif.wstrb       &lt;= 4'b1111;
+            vif.wdata       <= $urandom_range(0,10);
+            vif.wstrb       <= 4'b1111;
             @(posedge vif.wready);
             @(posedge vif.clk);
          end
      
-         vif.wlast       &lt;= 1'b1;
-         vif.bready      &lt;= 1'b1;
-         vif.awvalid     &lt;= 1'b0;
-         vif.wvalid      &lt;= 1'b0;
+         vif.wlast       <= 1'b1;
+         vif.bready      <= 1'b1;
+         vif.awvalid     <= 1'b0;
+         vif.wvalid      <= 1'b0;
          @(negedge vif.bvalid);
-         vif.bready      &lt;= 1'b0;
-          vif.wlast      &lt;= 1'b0; 
+         vif.bready      <= 1'b0;
+          vif.wlast      <= 1'b0; 
            
       endtask   
       
@@ -398,22 +398,22 @@ class driver extends uvm_driver #(transaction);
 
        
  
-        vif.arid        &lt;= tr.id;
-        vif.arlen       &lt;= 7;
-        vif.arsize      &lt;= 2;
-        vif.araddr      &lt;= 5;
-        vif.arburst     &lt;= 1; 
-        vif.arvalid     &lt;= 1'b1;  
-        vif.rready      &lt;= 1'b1;
+        vif.arid        <= tr.id;
+        vif.arlen       <= 7;
+        vif.arsize      <= 2;
+        vif.araddr      <= 5;
+        vif.arburst     <= 1; 
+        vif.arvalid     <= 1'b1;  
+        vif.rready      <= 1'b1;
         
-     for(int i = 0; i &lt; (vif.arlen + 1); i++) begin // 0 1  2 3 4 5 6 7
+     for(int i = 0; i < (vif.arlen + 1); i++) begin // 0 1  2 3 4 5 6 7
        @(posedge vif.arready);
        @(posedge vif.clk);
       end
       
      @(negedge vif.rlast);
-     vif.arvalid &lt;= 1'b0;
-     vif.rready  &lt;= 1'b0; 
+     vif.arvalid <= 1'b0;
+     vif.rready  <= 1'b0; 
   endtask
 
 //////////////////////////////////////////////////////////////////////////////
@@ -421,45 +421,45 @@ class driver extends uvm_driver #(transaction);
    task wrrd_wrap_wr();
     `uvm_info("DRV", "WRAP Mode Write Transaction Started", UVM_NONE);  
    /////////////////////////write logic
-            vif.resetn      &lt;= 1'b1;
-            vif.awvalid     &lt;= 1'b1;
-            vif.awid        &lt;= tr.id;
-            vif.awlen       &lt;= 7;
-            vif.awsize      &lt;= 2;
-            vif.awaddr      &lt;= 5;
-            vif.awburst     &lt;= 2;
+            vif.resetn      <= 1'b1;
+            vif.awvalid     <= 1'b1;
+            vif.awid        <= tr.id;
+            vif.awlen       <= 7;
+            vif.awsize      <= 2;
+            vif.awaddr      <= 5;
+            vif.awburst     <= 2;
      
      
-            vif.wvalid      &lt;= 1'b1;
-            vif.wid         &lt;= tr.id;
-            vif.wdata       &lt;= $urandom_range(0,10);
-            vif.wstrb       &lt;= 4'b1111;
-            vif.wlast       &lt;= 0;
+            vif.wvalid      <= 1'b1;
+            vif.wid         <= tr.id;
+            vif.wdata       <= $urandom_range(0,10);
+            vif.wstrb       <= 4'b1111;
+            vif.wlast       <= 0;
      
-            vif.arvalid     &lt;= 1'b0;  ///turn off read 
-            vif.rready      &lt;= 1'b0;
-            vif.bready      &lt;= 1'b0;
+            vif.arvalid     <= 1'b0;  ///turn off read 
+            vif.rready      <= 1'b0;
+            vif.bready      <= 1'b0;
             
             
              @(posedge vif.wready);
              @(posedge vif.clk);
 
-       for(int i = 0; i &lt; (vif.awlen); i++)
+       for(int i = 0; i < (vif.awlen); i++)
          begin
-            vif.wdata       &lt;= $urandom_range(0,10);
-            vif.wstrb       &lt;= 4'b1111;
+            vif.wdata       <= $urandom_range(0,10);
+            vif.wstrb       <= 4'b1111;
             @(posedge vif.wready);
             @(posedge vif.clk);
          end
      
-         vif.wlast       &lt;= 1'b1;
-         vif.bready      &lt;= 1'b1;
-         vif.awvalid     &lt;= 1'b0;
-         vif.wvalid      &lt;= 1'b0;
+         vif.wlast       <= 1'b1;
+         vif.bready      <= 1'b1;
+         vif.awvalid     <= 1'b0;
+         vif.wvalid      <= 1'b0;
         
          @(negedge vif.bvalid);
-         vif.bready      &lt;= 1'b0; 
-         vif.wlast       &lt;= 1'b0; 
+         vif.bready      <= 1'b0; 
+         vif.wlast       <= 1'b0; 
          
          
         endtask 
@@ -470,24 +470,24 @@ class driver extends uvm_driver #(transaction);
        task wrrd_wrap_rd(); 
       `uvm_info("DRV", "WRAP Mode Read Transaction Started", UVM_NONE);  
        @(posedge vif.clk);
-       vif.arvalid     &lt;= 1'b1;  
-       vif.rready      &lt;= 1'b1;
+       vif.arvalid     <= 1'b1;  
+       vif.rready      <= 1'b1;
   
  
-        vif.arid        &lt;= tr.id;
-        vif.arlen       &lt;= 7;
-        vif.arsize      &lt;= 2;
-        vif.araddr      &lt;= 5;
-        vif.arburst     &lt;= 2; 
+        vif.arid        <= tr.id;
+        vif.arlen       <= 7;
+        vif.arsize      <= 2;
+        vif.araddr      <= 5;
+        vif.arburst     <= 2; 
         
-     for(int i = 0; i &lt; (vif.arlen + 1); i++) begin // 0 1  2 3 4 5 6 7
+     for(int i = 0; i < (vif.arlen + 1); i++) begin // 0 1  2 3 4 5 6 7
        @(posedge vif.arready);
        @(posedge vif.clk);
       end
      
      @(negedge vif.rlast);
-     vif.arvalid &lt;= 1'b0; 
-     vif.rready  &lt;= 1'b0; 
+     vif.arvalid <= 1'b0; 
+     vif.rready  <= 1'b0; 
   endtask
   
   //////////////////////////////////////////////////////////////////////////
@@ -496,45 +496,45 @@ class driver extends uvm_driver #(transaction);
       `uvm_info("DRV", "Error Write Transaction Started", UVM_NONE);
    
    /////////////////////////write logic
-            vif.resetn      &lt;= 1'b1;
-            vif.awvalid     &lt;= 1'b1;
-            vif.awid        &lt;= tr.id;
-            vif.awlen       &lt;= 7;
-            vif.awsize      &lt;= 2;
-            vif.awaddr      &lt;= 128;
-            vif.awburst     &lt;= 0;
+            vif.resetn      <= 1'b1;
+            vif.awvalid     <= 1'b1;
+            vif.awid        <= tr.id;
+            vif.awlen       <= 7;
+            vif.awsize      <= 2;
+            vif.awaddr      <= 128;
+            vif.awburst     <= 0;
      
      
-            vif.wvalid      &lt;= 1'b1;
-            vif.wid         &lt;= tr.id;
-            vif.wdata       &lt;= $urandom_range(0,10);
-            vif.wstrb       &lt;= 4'b1111;
-            vif.wlast       &lt;= 0;
+            vif.wvalid      <= 1'b1;
+            vif.wid         <= tr.id;
+            vif.wdata       <= $urandom_range(0,10);
+            vif.wstrb       <= 4'b1111;
+            vif.wlast       <= 0;
      
-            vif.arvalid     &lt;= 1'b0;  ///turn off read 
-            vif.rready      &lt;= 1'b0;
-            vif.bready      &lt;= 1'b0;
+            vif.arvalid     <= 1'b0;  ///turn off read 
+            vif.rready      <= 1'b0;
+            vif.bready      <= 1'b0;
             
             
              @(posedge vif.wready);
              @(posedge vif.clk);
 
-     for(int i = 0; i &lt; (vif.awlen); i++)
+     for(int i = 0; i < (vif.awlen); i++)
          begin
-            vif.wdata       &lt;= $urandom_range(0,10);
-            vif.wstrb       &lt;= 4'b1111;
+            vif.wdata       <= $urandom_range(0,10);
+            vif.wstrb       <= 4'b1111;
             @(posedge vif.wready);
             @(posedge vif.clk);
          end
      
-         vif.wlast       &lt;= 1'b1;
-         vif.bready      &lt;= 1'b1;
-         vif.awvalid     &lt;= 1'b0;
-         vif.wvalid      &lt;= 1'b0;
+         vif.wlast       <= 1'b1;
+         vif.bready      <= 1'b1;
+         vif.awvalid     <= 1'b0;
+         vif.wvalid      <= 1'b0;
          
          @(negedge vif.bvalid);
-         vif.bready      &lt;= 1'b0;
-         vif.wlast       &lt;= 1'b0;
+         vif.bready      <= 1'b0;
+         vif.wlast       <= 1'b0;
         endtask
         
            
@@ -542,24 +542,24 @@ class driver extends uvm_driver #(transaction);
        task err_rd();  
         `uvm_info("DRV", "Error Read Transaction Started", UVM_NONE);
        @(posedge vif.clk);
-       vif.arvalid     &lt;= 1'b1;  
-       vif.rready      &lt;= 1'b1;
-       //vif.bready      &lt;= 1'b1;
+       vif.arvalid     <= 1'b1;  
+       vif.rready      <= 1'b1;
+       //vif.bready      <= 1'b1;
  
-        vif.arid        &lt;= tr.id;
-        vif.arlen       &lt;= 7;
-        vif.arsize      &lt;= 2;
-        vif.araddr      &lt;= 128;
-        vif.arburst     &lt;= 0; 
+        vif.arid        <= tr.id;
+        vif.arlen       <= 7;
+        vif.arsize      <= 2;
+        vif.araddr      <= 128;
+        vif.arburst     <= 0; 
         
-     for(int i = 0; i &lt; (vif.arlen + 1); i++) begin // 0 1  2 3 4 5 6 7
+     for(int i = 0; i < (vif.arlen + 1); i++) begin // 0 1  2 3 4 5 6 7
        @(posedge vif.arready);
        @(posedge vif.clk);
       end
      
      @(negedge vif.rlast);
-     vif.arvalid &lt;= 1'b0; 
-     vif.rready  &lt;= 1'b0; 
+     vif.arvalid <= 1'b0; 
+     vif.rready  <= 1'b0; 
   
     endtask
   ////////////////////////////////////////////////////////////////////////
@@ -573,19 +573,19 @@ class driver extends uvm_driver #(transaction);
              reset_dut();
            else if (tr.op == wrrdfixed)
              begin
-            `uvm_info("DRV", $sformatf("Fixed Mode Write -&gt; Read WLEN:%0d WSIZE:%0d",tr.awlen+1,tr.awsize), UVM_MEDIUM);
+            `uvm_info("DRV", $sformatf("Fixed Mode Write -> Read WLEN:%0d WSIZE:%0d",tr.awlen+1,tr.awsize), UVM_MEDIUM);
              wrrd_fixed_wr();
              wrrd_fixed_rd();
              end
            else if (tr.op == wrrdincr)
              begin
-            `uvm_info("DRV", $sformatf("INCR Mode Write -&gt; Read WLEN:%0d WSIZE:%0d",tr.awlen+1,tr.awsize), UVM_MEDIUM);
+            `uvm_info("DRV", $sformatf("INCR Mode Write -> Read WLEN:%0d WSIZE:%0d",tr.awlen+1,tr.awsize), UVM_MEDIUM);
              wrrd_incr_wr();
              wrrd_incr_rd();
              end   
            else if (tr.op == wrrdwrap)
              begin
-            `uvm_info("DRV", $sformatf("WRAP Mode Write -&gt; Read WLEN:%0d WSIZE:%0d",tr.awlen+1,tr.awsize), UVM_MEDIUM);
+            `uvm_info("DRV", $sformatf("WRAP Mode Write -> Read WLEN:%0d WSIZE:%0d",tr.awlen+1,tr.awsize), UVM_MEDIUM);
              wrrd_wrap_wr();
              wrrd_wrap_rd();
              end   
@@ -636,7 +636,7 @@ virtual axi_if vif;
   /////////////////////////////////////////////////////////////////////////
   
   task compare();
-    if(err == 0 &amp;&amp; rdresp == 0 &amp;&amp; wrresp == 0 )
+    if(err == 0 && rdresp == 0 && wrresp == 0 )
          begin
            `uvm_info("MON", $sformatf("Test Passed err :%0d wrresp :%0d rdresp :%0d ", err, rdresp, wrresp), UVM_MEDIUM); 
            err = 0;
@@ -659,12 +659,12 @@ virtual axi_if vif;
           `uvm_info("MON", "System Reset Detected", UVM_MEDIUM); 
         end
       
-      else if(vif.resetn &amp;&amp; vif.awaddr &lt; 128)
+      else if(vif.resetn && vif.awaddr < 128)
         begin
        
           wait(vif.awvalid == 1'b1);
           
-          for(int i =0; i &lt; (vif.awlen + 1); i++) begin
+          for(int i =0; i < (vif.awlen + 1); i++) begin
           @(posedge vif.wready);
           arr[vif.next_addrwr] = vif.wdata;
           end
@@ -675,7 +675,7 @@ virtual axi_if vif;
   //////////////////////////////////////////////////////        
           wait(vif.arvalid == 1'b1);
           
-          for(int i =0; i &lt; (vif.arlen + 1); i++) begin
+          for(int i =0; i < (vif.arlen + 1); i++) begin
             @(posedge vif.rvalid);
             if(vif.rdata != arr[vif.next_addrrd])
                begin
@@ -690,11 +690,11 @@ virtual axi_if vif;
            $display("------------------------------");
           end
           
-          else if (vif.resetn &amp;&amp; vif.awaddr &gt;= 128)
+          else if (vif.resetn && vif.awaddr >= 128)
           begin
           wait(vif.awvalid == 1'b1);
           
-          for(int i =0; i &lt; (vif.awlen + 1); i++) begin
+          for(int i =0; i < (vif.awlen + 1); i++) begin
           @(negedge vif.wready);
           end
           
@@ -703,7 +703,7 @@ virtual axi_if vif;
           
           wait(vif.arvalid == 1'b1);
           
-          for(int i =0; i &lt; (vif.arlen + 1); i++) begin
+          for(int i =0; i < (vif.arlen + 1); i++) begin
             @(posedge vif.arready);
             if(vif.rresp != 2'b00)
                begin
@@ -835,10 +835,10 @@ module tb;
  axi_slave dut (vif.clk, vif.resetn, vif.awvalid, vif.awready,  vif.awid, vif.awlen, vif.awsize, vif.awaddr,  vif.awburst, vif.wvalid, vif.wready, vif.wid, vif.wdata, vif.wstrb, vif.wlast, vif.bready, vif.bvalid, vif.bid, vif.bresp , vif.arready, vif.arid, vif.araddr, vif.arlen, vif.arsize, vif.arburst, vif.arvalid, vif.rid, vif.rdata, vif.rresp,vif.rlast,  vif.rvalid, vif.rready);
  
   initial begin
-    vif.clk &lt;= 0;
+    vif.clk <= 0;
   end
   
-  always #5 vif.clk &lt;= ~vif.clk;
+  always #5 vif.clk <= ~vif.clk;
   
     initial begin
     uvm_config_db#(virtual axi_if)::set(null, "*", "vif", vif);

@@ -54,6 +54,14 @@ module axi_slave(
   //axi_if vif();
   typedef enum bit [1:0] {awidle = 2'b00, awstart = 2'b01, awreadys = 2'b10} awstate_type;
   awstate_type awstate, awnext_state;
+  typedef enum bit [2:0] {widle = 0, wstart = 1, wreadys = 2, wvalids = 3, waddr_dec = 4} wstate_type;
+  wstate_type wstate, wnext_state;
+  typedef enum bit [1:0] {bidle = 0, bdetect_last = 1, bstart = 2, bwait = 3} bstate_type;
+  bstate_type bstate,bnext_state;
+  typedef enum bit [1:0] {aridle = 0, arstart = 1, arreadys = 2} arstate_type;
+  arstate_type arstate, arnext_state;
+  typedef enum bit [2:0] {ridle = 0, rstart = 1, rwait = 2, rvalids = 3, rerror = 4} rstate_type;
+  rstate_type rstate, rnext_state;
   
   reg [31:0] awaddrt;
   
@@ -61,15 +69,15 @@ module axi_slave(
   always_ff@(posedge clk , negedge resetn)
     begin
       if(!resetn) begin
-        awstate &lt;= awidle;  ///idle state for write address FSM
-        wstate  &lt;= widle;   ///idle state for write data fsm
-        bstate  &lt;= bidle;  ///// idle state for write response fsm
+        awstate <= awidle;  ///idle state for write address FSM
+        wstate  <= widle;   ///idle state for write data fsm
+        bstate  <= bidle;  ///// idle state for write response fsm
         end
       else
         begin
-        awstate &lt;= awnext_state;
-        wstate  &lt;= wnext_state;
-        bstate  &lt;= bnext_state;
+        awstate <= awnext_state;
+        wstate  <= wnext_state;
+        bstate  <= bnext_state;
         end
     end
   
@@ -715,9 +723,6 @@ module axi_slave(
   reg [7:0] boundary;  ////storing boundary
   reg [3:0] wlen_count;
   
-  typedef enum bit [2:0] {widle = 0, wstart = 1, wreadys = 2, wvalids = 3, waddr_dec = 4} wstate_type;
-  wstate_type wstate, wnext_state;
-  
   always_comb
     begin
       case(wstate)
@@ -750,7 +755,7 @@ module axi_slave(
                first = 1'b1;
                wlen_count = 0;
                end
-              else if (wlen_count &lt; (awlen + 1 ))
+              else if (wlen_count < (awlen + 1 ))
                begin
                nextaddr = retaddr;      
                end   
@@ -770,7 +775,7 @@ module axi_slave(
            wlen_count = 0;
            first = 0; 
            end
-          else if(wlen_count &lt; (awlen + 1)) 
+          else if(wlen_count < (awlen + 1)) 
           begin
            wnext_state = wvalids;
            wready      = 1'b1;
@@ -803,7 +808,7 @@ module axi_slave(
        wready      = 1'b0;
        wnext_state = wstart;
        
-       if(wlen_count &lt; (awlen + 1))
+       if(wlen_count < (awlen + 1))
        wlen_count = wlen_count + 1;
        else
        wlen_count = wlen_count;
@@ -815,10 +820,6 @@ module axi_slave(
  
  
  ////////////////////////fsm for write response
- 
- typedef enum bit [1:0] {bidle = 0, bdetect_last = 1, bstart = 2, bwait = 3} bstate_type;
- bstate_type bstate,bnext_state;
- 
  
  always_comb
  begin
@@ -841,9 +842,9 @@ module axi_slave(
       bid = awid;
       bvalid = 1'b1;
       bnext_state = bwait;
-       if( (awaddr &lt; 128 ) &amp;&amp; (awsize &lt;= 3'b010) )
+       if( (awaddr < 128 ) && (awsize <= 3'b010) )
          bresp = 2'b00;  ///okay
-       else if (awsize &gt; 3'b010)
+       else if (awsize > 3'b010)
          bresp = 2'b10; /////slverr
        else
           bresp = 2'b11;  ///no slave address   
@@ -865,19 +866,16 @@ module axi_slave(
  begin
     if(!resetn)
        begin
-       arstate &lt;= aridle;
-       rstate  &lt;= ridle;
+       arstate <= aridle;
+       rstate  <= ridle;
        end
        else
        begin
-       arstate &lt;= arnext_state;
-       rstate  &lt;= rnext_state;
+       arstate <= arnext_state;
+       rstate  <= rnext_state;
        end
  end
  
- 
- typedef enum bit [1:0] {aridle = 0, arstart = 1, arreadys = 2} arstate_type;
- arstate_type arstate, arnext_state;
  
  reg [31:0] araddrt; ///register address
  
@@ -1035,9 +1033,6 @@ module axi_slave(
  reg [3:0] len_count;
  reg [7:0] rdboundary;
  
- typedef enum bit [2:0] {ridle = 0, rstart = 1, rwait = 2, rvalids = 3, rerror = 4} rstate_type;
- rstate_type rstate, rnext_state;
- 
  /////////////////////////////////
  always_comb
  begin
@@ -1059,7 +1054,7 @@ module axi_slave(
     end
     
     rstart: begin
-      if ((araddrt &lt; 128) &amp;&amp; (arsize &lt;= 3'b010) ) begin
+      if ((araddrt < 128) && (arsize <= 3'b010) ) begin
         rid = arid;
         rvalid = 1'b1;
         rnext_state = rwait;
@@ -1113,12 +1108,12 @@ module axi_slave(
         end
    endcase
       end
-      else if ( (araddr &gt;= 128) &amp;&amp; ( arsize &lt;= 3'b010) ) begin 
+      else if ( (araddr >= 128) && ( arsize <= 3'b010) ) begin 
         rresp = 2'b11;  
         rvalid = 1'b1;
         rnext_state = rerror; 
       end
-      else if (arsize &gt; 3'b010) begin
+      else if (arsize > 3'b010) begin
         rresp = 2'b10;
         rvalid = 1'b1;
         rnext_state = rerror;
@@ -1151,7 +1146,7 @@ module axi_slave(
    rerror : begin 
        rvalid = 1'b0;
      
-         if(len_count &lt; (arlen)) 
+         if(len_count < (arlen)) 
             begin
             if(arready) 
               begin
