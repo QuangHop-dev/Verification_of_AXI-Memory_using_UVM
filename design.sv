@@ -20,7 +20,7 @@ module axi_slave(
   output reg wready, //// slave is ready to accept new data 
   input [3:0] wid, /// unique id for transaction
   input [31:0] wdata, //// data 
-  input [3:0] wstrb, //// lane having valid data
+  input [3:0] wstrb, //// lane having valid data - byte enable
   input wlast, //// last transfer in write burst
  
   ///////////////write response channel
@@ -84,7 +84,7 @@ module axi_slave(
   
   /////////////fsm for write address channel
   always_comb
-    begin
+      begin
       case(awstate)
       awidle:
       begin
@@ -122,7 +122,7 @@ module axi_slave(
   
   
   reg [31:0] wdatat;
-  reg [7:0] mem[128] = '{default:12};
+  reg [7:0] mem[128] = '{default:12}; // có khả năng sai [0:127]
   reg [31:0] retaddr;
   reg [31:0] nextaddr;
   reg first; /// check operation executed first time
@@ -322,15 +322,22 @@ module axi_slave(
   endfunction   
   
   ///////////////////////Function to compute Wrapping boundary
+  /////////////note: 
+  /* awlen = 1 -> 2 beat
+     awlen = 2 -> 4 beat
+
+     awsize = 0 -> 1 byte, 1 -> 2 ,... tăng theo cấp số nhân
+     
+     CT chuẩn: boundary = (awlen + 1) * (2^awsize)*/
   
   
      function bit [7:0] wrap_boundary (input bit [3:0] awlen,input bit[2:0] awsize);
        bit [7:0] boundary;
       
-     unique case(awlen)
+     unique case(awlen) //số lượng beat trong burst
        4'b0001: 
        begin
-               unique case(awsize)
+               unique case(awsize) //số lượng byte mỗi beat
                        3'b000: begin
                        boundary = 2 * 1; 
                       end

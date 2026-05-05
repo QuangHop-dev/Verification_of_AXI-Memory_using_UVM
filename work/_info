@@ -1,8 +1,12 @@
 m255
 K4
 z2
-!s12c _opt
-Z0 !s99 nomlopt
+Z0 !s12c _opt
+Z1 !s99 nomlopt
+!s12c _opt1
+R1
+R0
+R1
 !s11f MIXED_VERSIONS
 13
 !s112 1.1
@@ -10,119 +14,135 @@ Z0 !s99 nomlopt
 !i10e 25
 !i10f 100
 cModel Technology
-dC:/Users/Andrew Pham/Desktop/NTT_INTT
+Z2 dC:/Users/Andrew Pham/Desktop/NTT_INTT
 T_opt
-!s11d testbench_sv_unit D:/GitHub/Verification_of_AXI-Memory_using_UVM/work 1 axi_if 1 D:/GitHub/Verification_of_AXI-Memory_using_UVM/work 
-!s11d uvm_pkg C:/questasim64_2024.1/uvm-1.1d 1 axi_if 1 D:/GitHub/Verification_of_AXI-Memory_using_UVM/work 
-!s110 1776621638
-VTddKI`FK]5f[]cFg@0NXD1
-04 2 4 work tb fast 0
-=1-141333544bc3-69e51841-33d-3d24
-R0
-!s12f OEM100
-!s12b OEM100
-!s124 OEM100
-o-quiet -auto_acc_if_foreign -work work +acc
-Z1 tCvgOpt 0
-n@_opt
-OL;O;2024.1;79
-Yaxi_if
-Z2 2D:/GitHub/Verification_of_AXI-Memory_using_UVM/design.sv
-Z3 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-Z4 !s110 1776621623
-!i10b 1
-!s100 FWTjkEXE3XaNCC6nG?jk11
-ID>]lX@5ae8M=LJ?WHDRZ@3
-S1
-Z5 dD:/GitHub/Verification_of_AXI-Memory_using_UVM
-Z6 w1776621616
-Z7 8D:/GitHub/Verification_of_AXI-Memory_using_UVM/design.sv
-Z8 FD:/GitHub/Verification_of_AXI-Memory_using_UVM/design.sv
-!i122 5
-L0 1174 0
-Z9 VDg1SIo80bB@j0V0VzS_@n1
-Z10 OL;L;2024.1;79
-r1
-!s85 0
-31
-Z11 !s108 1776621623.000000
-Z12 !s107 D:/GitHub/Verification_of_AXI-Memory_using_UVM/design.sv|
-Z13 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/GitHub/Verification_of_AXI-Memory_using_UVM/design.sv|
-!i113 0
-Z14 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z3 !s11d testbench_sv_unit D:/GitHub/Verification_of_AXI-Memory_using_UVM/work 1 axi_if 1 D:/GitHub/Verification_of_AXI-Memory_using_UVM/work 
+Z4 !s11d uvm_pkg C:/questasim64_2024.1/uvm-1.1d 1 axi_if 1 D:/GitHub/Verification_of_AXI-Memory_using_UVM/work 
+!s110 1776881078
+VD8>`R9LaOTe;lS4[T=O1S3
+Z5 04 2 4 work tb fast 0
+=1-141333544bc3-69e90db3-230-3394
 R1
-vaxi_slave
-R2
+Z6 !s12f OEM100
+Z7 !s12b OEM100
+Z8 !s124 OEM100
+o-quiet -auto_acc_if_foreign -work work +acc
+Z9 tCvgOpt 0
+n@_opt
+Z10 OL;O;2024.1;79
+T_opt1
 R3
 R4
-!i10b 1
-!s100 gTYLQGX2CnnX@5e=7CF5b3
-Im29;F7dQcI^;`=`S[m3<Y1
-S1
+!s110 1776840391
+VX;2S^NJJ8SXLGU0fOYJ:c2
 R5
+=1-141333544bc3-69e86ec4-283-6334
+R1
 R6
 R7
 R8
-!i122 5
-L0 2 1168
+o-quiet -auto_acc_if_foreign -work work
 R9
+n@_opt1
 R10
+R2
+Yaxi_if
+Z11 2D:\GitHub\Verification_of_AXI-Memory_using_UVM\design.sv
+Z12 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z13 !s110 1776881040
+!i10b 1
+!s100 ezNl[R]Ph@m?WOEXRSK?c2
+I=TdTC3I4Z;1LUOBnT<[O]3
+S1
+Z14 dD:/GitHub/Verification_of_AXI-Memory_using_UVM
+Z15 w1776846148
+Z16 8D:\GitHub\Verification_of_AXI-Memory_using_UVM\design.sv
+Z17 FD:\GitHub\Verification_of_AXI-Memory_using_UVM\design.sv
+!i122 12
+L0 1181 0
+Z18 VDg1SIo80bB@j0V0VzS_@n1
+Z19 OL;L;2024.1;79
 r1
 !s85 0
 31
+Z20 !s108 1776881040.000000
+Z21 !s107 D:\GitHub\Verification_of_AXI-Memory_using_UVM\design.sv|
+Z22 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:\GitHub\Verification_of_AXI-Memory_using_UVM\design.sv|
+!i113 0
+Z23 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R9
+vaxi_slave
 R11
 R12
 R13
-!i113 0
+!i10b 1
+!s100 =^zJOT`VBjNO9GAiFJEjK1
+IO84dCB_fTGQ>IALngnZIP2
+S1
 R14
-R1
-vtb
-Z15 2D:/GitHub/Verification_of_AXI-Memory_using_UVM/testbench.sv
-R3
-Z16 DXx6 mtiUvm 7 uvm_pkg 0 22 MiVhEBb9cnBN5^J=<XBKI2
-DXx4 work 17 testbench_sv_unit 0 22 La`30=eiZeEP=BQz^oF8a0
-R4
+R15
+R16
+R17
+!i122 12
+L0 2 1175
+R18
+R19
+r1
+!s85 0
+31
+R20
+R21
+R22
+!i113 0
+R23
 R9
+vtb
+Z24 2D:\GitHub\Verification_of_AXI-Memory_using_UVM\testbench.sv
+R12
+Z25 DXx6 mtiUvm 7 uvm_pkg 0 22 MiVhEBb9cnBN5^J=<XBKI2
+DXx4 work 17 testbench_sv_unit 0 22 l@@ZlQD648T7A5`VgMiB:0
+Z26 !s110 1776881041
+R18
 r1
 !s85 0
 !i10b 1
 !s100 WRgXc?4fGaHkEkb2D04bL2
-IKoTX;bbcjo1Ai^dZK?78I0
+I7flIEz7QWDQW>abcQY85_3
 !s105 testbench_sv_unit
 S1
-R5
-Z17 w1776621120
-Z18 8D:/GitHub/Verification_of_AXI-Memory_using_UVM/testbench.sv
-Z19 FD:/GitHub/Verification_of_AXI-Memory_using_UVM/testbench.sv
-!i122 6
-L0 832 28
-R10
-31
-R11
-Z20 !s107 C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_deprecated_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_reg_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_callback_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_sequence_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/tlm1/uvm_tlm_imps.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_tlm_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_printer_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_object_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_phase_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_message_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_version_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/uvm_macros.svh|D:/GitHub/Verification_of_AXI-Memory_using_UVM/testbench.sv|
-Z21 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/GitHub/Verification_of_AXI-Memory_using_UVM/testbench.sv|
-!i113 0
 R14
-R1
+Z27 w1776852488
+Z28 8D:\GitHub\Verification_of_AXI-Memory_using_UVM\testbench.sv
+Z29 FD:\GitHub\Verification_of_AXI-Memory_using_UVM\testbench.sv
+!i122 13
+L0 832 28
+R19
+31
+Z30 !s108 1776881041.000000
+Z31 !s107 C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_deprecated_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_reg_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_callback_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_sequence_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/tlm1/uvm_tlm_imps.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_tlm_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_printer_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_object_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_phase_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_message_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_version_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/uvm_macros.svh|D:\GitHub\Verification_of_AXI-Memory_using_UVM\testbench.sv|
+Z32 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:\GitHub\Verification_of_AXI-Memory_using_UVM\testbench.sv|
+!i113 0
+R23
+R9
 Xtestbench_sv_unit
 !i114 1
-R15
+R24
 !s115 axi_if
-R3
-R16
-R4
-VLa`30=eiZeEP=BQz^oF8a0
+R12
+R25
+R26
+Vl@@ZlQD648T7A5`VgMiB:0
 r1
 !s85 0
 !i10b 1
-!s100 <la3C]Yl]f@IFeXUmGO8P1
-ILa`30=eiZeEP=BQz^oF8a0
+!s100 h5I84JMD6DdH24GadOgo:0
+Il@@ZlQD648T7A5`VgMiB:0
 !i103 1
 S1
-R5
-R17
-R18
-R19
+R14
+R27
+R28
+R29
 FC:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/uvm_macros.svh
 FC:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_version_defines.svh
 FC:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_message_defines.svh
@@ -135,13 +155,13 @@ FC:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_sequence_
 FC:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_callback_defines.svh
 FC:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_reg_defines.svh
 FC:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_deprecated_defines.svh
-!i122 6
+!i122 13
 L0 2 0
-R10
+R19
 31
-R11
-R20
-R21
+R30
+R31
+R32
 !i113 0
-R14
-R1
+R23
+R9
